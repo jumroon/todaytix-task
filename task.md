@@ -15,11 +15,11 @@ PRIMARY KEY (userID, lotteryID, showID)
 
 **Explanation**
 
-UserId: individual userIds
-lotteryId: Id of a particular lottery that the contestants are entering. lottery for Harry Potter (all dates) has its own lotteryId
-number_tickets: number of tickets user wants to win
-showID: for particular show (e.g. tuesday nov 7, 2022, harry potter, specific show ID). it is an array type because one person may click okay to many different dates
-is_winner: boolean of true/false. this is to make sure that once they win a lottery they are not entered to win other lotteries for the same show (i.e. the assumption is if you win tickets to go watch harry potter on nov 7, you cant also win tickets for wed, thur, friday etc. In real life this may be irrelevant if they can win tickets for many showings for the same show)
+- UserId: individual userIds
+- lotteryId: Id of a particular lottery that the contestants are entering. lottery for Harry Potter (all dates) has its own lotteryId
+- number_tickets: number of tickets user wants to win
+- showID: for particular show (e.g. tuesday nov 7, 2022, harry potter, specific show ID). it is an array type because one person may click okay to many different dates
+- is_winner: boolean of true/false. this is to make sure that once they win a lottery they are not entered to win other lotteries for the same show (i.e. the assumption is if you win tickets to go watch harry potter on nov 7, you cant also win tickets for wed, thur, friday etc. In real life this may be irrelevant if they can win tickets for many showings for the same show)
 
 ---
 
