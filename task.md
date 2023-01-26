@@ -4,22 +4,21 @@
 
 ```
 CREATE TABLE lottery_entries (
-  user_id NOT NULL REFERENCES user_id in users_table ,
-  lottery_id INTEGER NOT NULL REFERENCES lottery_id in lottery_table,
+  user_id PRIMARY KEY NOT NULL REFERENCES <user_id> in users_table ,
+  lottery_id INTEGER NOT NULL REFERENCES <lottery_id> in lottery_table,
   number_tickets INTEGER NOT NULL,
-  show_id INTEGER[] NOT NULL references show_id in shows_table,
+  show_id INTEGER[] NOT NULL references <show_id> in showings_table,
   is_winner BOOLEAN NOT NULL,
-  PRIMARY KEY (user_id, lottery_id, show_id)
 );
 ```
 
 **Explanation**
 
-- user_id: individual userIds, references a general table of users
-- lottery_id: Id of a particular lottery that the contestants are entering. For example, Harry Potter may have multiple showings at different venues and/or different times. All the showings for Harry Potter have the same lotteryId, despite the time or venue.
-- number_tickets: number of tickets user wants to win
-- show_id: show_id for a particular showing, for example Harry Potter, at Broadway Theater on Wednesday November 7 has a unique show_id. As array because participants may choose multiple showings to enter for.
-- is_winner: boolean of true/false. Used to ensure a winner of a lottery is not entered for other showings of the same show. In real life this may be irrelevant if a participant can win tickets for many showings for the same show.
+- `user_id`: individual userIds, references a general table of users
+- `lottery_id`: Id of a particular lottery that the contestants are entering. For example, Harry Potter may have multiple showings at different venues and/or different times. All the showings for Harry Potter have the same lotteryId, despite the time or venue.
+- `number_tickets`: number of tickets user wants to win
+- `show_id`: show_id for a particular showing, for example Harry Potter, at Broadway Theater on Wednesday November 7 has a unique show_id. As array because participants may choose multiple showings to enter for.
+- `is_winner`: boolean of true/false. Used to ensure a winner of a lottery is not entered for other showings of the same show. In real life this may be irrelevant if a participant can win tickets for many showings for the same show.
 
 ---
 
@@ -68,8 +67,10 @@ function pickLotteryWinners(entries, numberOfTickets) {
 
 **Use Example**
 
+- SQL query to create lottery_entries table
+
 - pick winners
-  const winners = pickLotteryWinners(entries, 100);
+  `const winners = pickLotteryWinners(entries, 100);`
 
 - query marks winners in the database
-  markAsWinnersInTheDatabase(winners)
+  `markAsWinnersInTheDatabase(winners)`
