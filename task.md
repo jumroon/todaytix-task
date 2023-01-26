@@ -4,22 +4,22 @@
 
 ```
 CREATE TABLE lottery_entries (
-userID UUID NOT NULL DEFAULT gen_random_uuid(),
-lotteryID INTEGER NOT NULL,
-number_tickets INTEGER NOT NULL,
-showID INTEGER[] NOT NULL,
-is_winner BOOLEAN NOT NULL,
-PRIMARY KEY (userID, lotteryID, showID)
+  user_id NOT NULL REFERENCES user_id in users_table ,
+  lottery_id INTEGER NOT NULL REFERENCES lottery_id in lottery_table,
+  number_tickets INTEGER NOT NULL,
+  show_id INTEGER[] NOT NULL references show_id in shows_table,
+  is_winner BOOLEAN NOT NULL,
+  PRIMARY KEY (user_id, lottery_id, show_id)
 );
 ```
 
 **Explanation**
 
-- UserId: individual userIds
-- lotteryId: Id of a particular lottery that the contestants are entering. lottery for Harry Potter (all dates) has its own lotteryId
+- user_id: individual userIds, references a general table of users
+- lottery_id: Id of a particular lottery that the contestants are entering. For example, Harry Potter may have multiple showings at different venues and/or different times. All the showings for Harry Potter have the same lotteryId, despite the time or venue.
 - number_tickets: number of tickets user wants to win
-- showID: for particular show (e.g. tuesday nov 7, 2022, harry potter, specific show ID). it is an array type because one person may click okay to many different dates
-- is_winner: boolean of true/false. this is to make sure that once they win a lottery they are not entered to win other lotteries for the same show (i.e. the assumption is if you win tickets to go watch harry potter on nov 7, you cant also win tickets for wed, thur, friday etc. In real life this may be irrelevant if they can win tickets for many showings for the same show)
+- show_id: show_id for a particular showing, for example Harry Potter, at Broadway Theater on Wednesday November 7 has a unique show_id. As array because participants may choose multiple showings to enter for.
+- is_winner: boolean of true/false. Used to ensure a winner of a lottery is not entered for other showings of the same show. In real life this may be irrelevant if a participant can win tickets for many showings for the same show.
 
 ---
 
@@ -28,30 +28,48 @@ PRIMARY KEY (userID, lotteryID, showID)
 ```
 SELECT *
 FROM lottery_entries
-WHERE lottery_id = lotteryId AND show_id IN (showId we are drawing for) AND userid NOT IN (
-SELECT DISTINCT userId
-FROM lottery_entries
-WHERE lotter_id = lotteryId AND is_winner = true
+WHERE lottery_id = <lottery_id> AND show_id IN (showId we are drawing for) AND user_id NOT IN (
+  SELECT DISTINCT user_id
+  FROM lottery_entries
+  WHERE lotter_id = <lotteryId> AND is_winner = true
 )
-ORDER BY random() LIMIT [limitHere];
+ORDER BY random() LIMIT <limit>;
 ```
 
 **Explanation**
 
-This is a single SQL query that does two things. The first main thing it does is that it selects a certain number of users in a random order. This is already 'lottery picking' in a way. If there are 1000 entries but only 100 tickets to give out, it probably does not make sense to return 1000 entries. The idea is the the number of entries that are returned relates to number of tickets given out. For the ease of explanation let's assume we have 100 tickets to give out and so we LIMIT it to 100 (as each person will want at least 1 ticket).
+This is a single SQL query that selects randomly a certain number of users in a random order.
+
+Limit: trade-offs to having a limit or not. If there is no limit, returning every user means that the algorithm can go through every user and raises chance that all the tickets will be given away. However, without a limit the query will be more costly.
+
+Another algorithm to pick winners from the list returned from the SQL query. Algorithm goes through each entry in the list and puts winners into an array until one of the two conditions are met:
+
+- ticketsGivenOut are equal to numberOfTickets
+- in the next entry adding those tickets to ticketsGiven out will be larger than number of tickets that can be given out.
 
 **Algorithm**
 
-Algorithm to pick the winners from the list, adding them up until a certain number of tickets is achieved or we run out of people in the given array. For example, if there are 10 tickets to give out, and we have given out 9 of them, and everyone else in the lottery wants at least two tickets, we stop once we've looped through the data.
-
 ```
-function pickLotteryWinners(data, numberOfTickets) {
+function pickLotteryWinners(entries, numberOfTickets) {
   const winners = [];
-  let i = 0;
-  while (numberOfTickets > 0 && data.length > i) {
-    winners.push[data.userId[i]];
-    numberOfTickets - data.numberOfTickets[i];
-  }
+
+  const ticketsGivenOut = 0;
+
+  entries.forEach((entry) => {
+    if (ticketsGivenOut <= numberOfTickets && entry.numberOfTickets + ticketsGivenOut <= numberOfTickets) {
+      ticketsGivenOut += entry.numberOfTickets;
+      winners.push(entry);
+    }
+  });
+
   return winners;
 }
 ```
+
+**Use Example**
+
+- pick winners
+  const winners = pickLotteryWinners(entries, 100);
+
+- query marks winners in the database
+  markAsWinnersInTheDatabase(winners)
