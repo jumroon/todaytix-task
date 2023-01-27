@@ -73,11 +73,11 @@ function pickLotteryWinners(entries, numberOfTickets) {
 
 **`POST`**
 
--Path: /lotteries/`<lottery_id>`
+- Path: /lotteries/`<lottery_id>`
 
--Description: enter specific lottery, user chooses number of tickets and showings
+- Description: enter specific lottery, user chooses number of tickets and showings
 
--Data sent:
+- Data sent:
 
 ```
 {
