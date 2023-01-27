@@ -28,7 +28,7 @@ CREATE TABLE lottery_entries (
 ```
 SELECT *
 FROM lottery_entries
-WHERE lottery_id = <lottery_id> AND show_id IN (showId we are drawing for) AND user_id NOT IN (
+WHERE lottery_id = <lottery_id> AND show_id IN <show_id> = ANY(show_ids) AND user_id IN (
   SELECT DISTINCT user_id
   FROM lottery_entries
   WHERE lottery_id = <lotteryId> AND winning_show_id = NULL
