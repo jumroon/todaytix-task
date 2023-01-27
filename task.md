@@ -71,6 +71,8 @@ function pickLotteryWinners(entries, numberOfTickets) {
 
 - SQL query to create lottery_entries table
 
+- SELECT query to return randomly ordered entries
+
 - pick winners
   `const winners = pickLotteryWinners(entries, 100);`
 
