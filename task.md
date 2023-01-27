@@ -13,7 +13,7 @@ CREATE TABLE lottery_entries (
 
 ```
 
-**Explanation**
+### Explanation
 
 - `user_id`: individual user id, references a table of users
 - `lottery_id`: id of a particular lottery that the contestants are entering. For example, Harry Potter may have multiple showings at different venues and/or different times. All the showings for Harry Potter have the same lottery id, regardless of the time or venue.
@@ -36,7 +36,7 @@ WHERE lottery_id = <lottery_id> AND show_id IN <show_id> = ANY(show_ids) AND use
 ORDER BY random() LIMIT <limit>;
 ```
 
-**Explanation**
+### Explanation:
 
 This is an SQL query that selects randomly a `<limit>` number of users in a random order.
 
@@ -47,7 +47,7 @@ An algorithm is used to pick winners from the list returned from the SQL query. 
 - If the the total number of tickets given out (`ticketsGivenOut`) will be smaller than or equal to the total number of tickets to give away (`numberOfTickets`) after selecting the user as winner, the user is added to the list of winners.
 - If the the total number of tickets given out will exceed to the total number of tickets to give away after selecting the user as winner, the user is not added to the list of winners.
 
-**Algorithm**
+## Algorithm
 
 ```
 function pickLotteryWinners(entries, numberOfTickets) {
@@ -67,14 +67,17 @@ function pickLotteryWinners(entries, numberOfTickets) {
 
 ```
 
-**API Endpoints**
+## API Endpoints
 
-- `POST`
-  Path: /lotteries/`<lottery_id>`
+### Enter the lottery
 
-  Description: enter specific lottery, user chooses number of tickets and showings
+**`POST`**
 
-  Data sent:
+-Path: /lotteries/`<lottery_id>`
+
+-Description: enter specific lottery, user chooses number of tickets and showings
+
+-Data sent:
 
 ```
 {
@@ -85,24 +88,26 @@ function pickLotteryWinners(entries, numberOfTickets) {
 }
 ```
 
-- `PUT`
-  Path: /admin/lotteries/`<lottery_id>`/pickWinners
+**`PUT`**
 
-  Description: secure path for admin. Pick lottery winners, update winning_show_id params
+- Path: /admin/lotteries/`<lottery_id>`/pickWinners
 
-- `GET`
-  Path: /admin/lotteries/`<lottery_id>`/winners
+- Description: secure path for admin. Pick lottery winners, update winning_show_id params
 
-  Description: request for retrieving all the winners from a lottery of `<lottery_id>`
+**`GET`**
 
-**Implementation**
+- Path: /admin/lotteries/`<lottery_id>`/winners
+
+- Description: request for retrieving all the winners from a lottery of `<lottery_id>`
+
+## Implementation
 
 - Query the database with the query provided to retrieve the list of potential winners for a showing.
 - Pick the winners using the `pickLotteryWinners` function.
 - For each winner, set `winning_show_id` in the `lottery_entries` table.
 - To retrieve all winners of a specific lottery, regardless of the showing, select all users where `lottery_id` is equal to the id of the lottery and `winning_show_id` is not `NULL`.
 
-**Use Example**
+## Use Example
 
 - SQL query to create lottery_entries table
 
