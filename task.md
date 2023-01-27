@@ -52,18 +52,19 @@ Another algorithm to pick winners from the list returned from the SQL query. Alg
 ```
 function pickLotteryWinners(entries, numberOfTickets) {
   const winners = [];
-
-  const ticketsGivenOut = 0;
-
+  let ticketsGivenOut = 0;
   entries.forEach((entry) => {
-    if (ticketsGivenOut <= numberOfTickets && entry.numberOfTickets + ticketsGivenOut <= numberOfTickets) {
-      ticketsGivenOut += entry.numberOfTickets;
-      winners.push(entry);
+    if (
+      ticketsGivenOut <= numberOfTickets &&
+      entry.number_tickets + ticketsGivenOut <= numberOfTickets
+    ) {
+      ticketsGivenOut += entry.number_tickets;
+      winners.push(entry.user_id);
     }
   });
-
-  return winners;
+  return { winners, ticketsGivenOut };
 }
+
 ```
 
 **Use Example**
