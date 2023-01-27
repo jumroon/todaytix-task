@@ -88,11 +88,15 @@ function pickLotteryWinners(entries, numberOfTickets) {
 }
 ```
 
+### Pick Lottery Winners
+
 **`PUT`**
 
 - Path: /admin/lotteries/`<lottery_id>`/pickWinners
 
 - Description: secure path for admin. Pick lottery winners, update winning_show_id params
+
+### Get Lottery Winners
 
 **`GET`**
 
