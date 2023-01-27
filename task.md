@@ -67,11 +67,38 @@ function pickLotteryWinners(entries, numberOfTickets) {
 
 ```
 
+**API Endpoints**
+
+- `POST`
+  Path: /lotteries/`<lottery_id>`
+
+  Description: enter specific lottery, user chooses number of tickets and showings
+
+  Data sent:
+
+{
+"user_id": 1,
+"lottery_id": 1,
+"number_tickets": 2,
+"show_id": [1, 2],
+}
+
+- `PUT`
+  Path: /admin/lotteries/`<lottery_id>`/pickWinners
+
+  Description: secure path for admin. Pick lottery winners, update winning_show_id params
+
+- `GET`
+  Path: /admin/lotteries/`<lottery_id>`/winners
+
+  Description: request for retrieving all the winners from a lottery of `<lottery_id>`
+
 **Implementation**
 
-- Query the database with the query provided to retrieve the list of potential winners.
-- Pick the final winners using the `pickLotteryWinners` function.
-- For each
+- Query the database with the query provided to retrieve the list of potential winners for a showing.
+- Pick the winners using the `pickLotteryWinners` function.
+- For each winner, set `winning_show_id` in the `lottery_entries` table.
+- To retrieve all winners of a specific lottery, regardless of the showing, select all users where `lottery_id` is equal to the id of the lottery and `winning_show_id` is not `NULL`.
 
 **Use Example**
 
