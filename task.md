@@ -76,12 +76,14 @@ function pickLotteryWinners(entries, numberOfTickets) {
 
   Data sent:
 
+```
 {
 "user_id": 1,
 "lottery_id": 1,
 "number_tickets": 2,
 "show_id": [1, 2],
 }
+```
 
 - `PUT`
   Path: /admin/lotteries/`<lottery_id>`/pickWinners
