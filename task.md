@@ -4,12 +4,13 @@
 
 ```
 CREATE TABLE lottery_entries (
-  user_id PRIMARY KEY NOT NULL REFERENCES <user_id> in users_table ,
-  lottery_id INTEGER NOT NULL REFERENCES <lottery_id> in lottery_table,
+  user_id INTEGER PRIMARY KEY NOT NULL REFERENCES users_table(user_id),
+  lottery_id INTEGER NOT NULL REFERENCES lottery_table(lottery_id),
   number_tickets INTEGER NOT NULL,
-  show_id INTEGER[] NOT NULL references <show_id> in showings_table,
-  is_winner BOOLEAN NOT NULL,
+  show_id INTEGER[] REFERENCES showings_table(show_id),
+  is_winner BOOLEAN NOT NULL DEFAULT false
 );
+
 ```
 
 **Explanation**

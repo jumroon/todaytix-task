@@ -1,0 +1,37 @@
+[
+  {
+    "user_id": 1,
+    "lottery_id": 1,
+    "number_tickets": 2,
+    "show_id": [1, 2],
+    "is_winner": false
+  },
+  {
+    "user_id": 2,
+    "lottery_id": 1,
+    "number_tickets": 1,
+    "show_id": [1],
+    "is_winner": false
+  },
+  {
+    "user_id": 3,
+    "lottery_id": 2,
+    "number_tickets": 2,
+    "show_id": [1, 2, 3, 5],
+    "is_winner": false
+  },
+  {
+    "user_id": 4,
+    "lottery_id": 1,
+    "number_tickets": 1,
+    "show_id": [1, 2, 4],
+    "is_winner": false
+  },
+  {
+    "user_id": 5,
+    "lottery_id": 2,
+    "number_tickets": 2,
+    "show_id": [1, 2],
+    "is_winner": false
+  }
+]
