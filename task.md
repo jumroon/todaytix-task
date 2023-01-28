@@ -102,7 +102,7 @@ function pickLotteryWinners(entries, numberOfTickets) {
 
 - Path: /admin/lotteries/`<lottery_id>`/winners
 
-- Description: request for retrieving all the winners from a lottery of `<lottery_id>`
+- Description: request for retrieving all the winners from a lottery of `<lottery_id>`.
 
 ## Implementation
 
