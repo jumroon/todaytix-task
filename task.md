@@ -75,7 +75,7 @@ function pickLotteryWinners(entries, numberOfTickets) {
 
 - Path: /lotteries/`<lottery_id>`
 
-- Description: enter specific lottery, user chooses number of tickets and showings
+- Description: enter specific lottery, user chooses number of tickets and showings.
 
 - Example payload:
 
