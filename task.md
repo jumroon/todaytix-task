@@ -104,6 +104,34 @@ function pickLotteryWinners(entries, numberOfTickets) {
 
 - Description: request for retrieving all the winners from a lottery of `<lottery_id>`.
 
+- Example response:
+
+```
+[
+  {
+    "user_id": 1,
+    "lottery_id": 1,
+    "number_tickets": 2,
+    "show_id": [1, 2],
+    "winning_show_id": 2
+  },
+  {
+    "user_id": 2,
+    "lottery_id": 1,
+    "number_tickets": 1,
+    "show_id": [1],
+    "winning_show_id": 1
+  },
+  {
+    "user_id": 3,
+    "lottery_id": 1,
+    "number_tickets": 2,
+    "show_id": [1, 2, 3, 5],
+    "winning_show_id": 3
+  }
+]
+```
+
 ## Implementation
 
 - Query the database with the query provided to retrieve the list of potential winners for a showing.
