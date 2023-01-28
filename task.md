@@ -94,7 +94,7 @@ function pickLotteryWinners(entries, numberOfTickets) {
 
 - Path: /admin/lotteries/`<lottery_id>`/pickWinners
 
-- Description: secure path for admin. Pick lottery winners, update winning_show_id params
+- Description: secure path for admin. Pick lottery winners. Calling this API runs the `pickLotteryWinners` function for each `show_id` belonging to the lottey. It updates `winning_show_id` for each user selected as a winner.
 
 ### Get Lottery Winners
 
