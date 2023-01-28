@@ -17,7 +17,7 @@ CREATE TABLE lottery_entries (
 
 - `user_id`: individual user id, references a table of users.
 - `lottery_id`: id of the lottery that the contestants are entering. For example, Harry Potter may have multiple showings at different venues and/or different times. All the showings for Harry Potter have the same lottery id, regardless of the time or venue.
-- `number_tickets`: number of tickets user wants to win. The maximum value can be set by the API user. In theory, the algorithm can work with any number of tickets.
+- `number_tickets`: number of tickets user wants to win. The maximum value can be set by the API user. In theory, the algorithm can work with any number of tickets. There are no partial wins - the user either wins the number of tickets they entered for or they do not win any tickets.
 - `show_ids`: id for a particular showing, for example Harry Potter, at Broadway Theater on Wednesday November 7 has a unique `show_id`. `show_ids` is an array because participants may choose multiple showings to enter for.
 - `winning_show_id`: indicates whether the entry won tickets for a show. Contains the `show_id` if the entry is a winner and `NULL` otherwise.
 
