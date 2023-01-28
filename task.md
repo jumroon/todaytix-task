@@ -38,7 +38,7 @@ ORDER BY random() LIMIT <limit>;
 
 ### Explanation:
 
-This is an SQL query that selects randomly a `<limit>` number of users in a random order.
+This is an SQL query that selects a `<limit>` number of users in a random order.
 
 Limit: trade-offs to having a limit or not. If there is no limit, returning every user means that the algorithm can go through every user and raises chance that all the tickets will be given away. However, without a limit the query will be more costly.
 
