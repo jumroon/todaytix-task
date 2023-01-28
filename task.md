@@ -132,21 +132,8 @@ function pickLotteryWinners(entries, numberOfTickets) {
 ]
 ```
 
-## Implementation
+## Usage Example
 
-- Query the database with the query provided to retrieve the list of potential winners for a showing.
-- Pick the winners using the `pickLotteryWinners` function.
-- For each winner, set `winning_show_id` in the `lottery_entries` table.
-- To retrieve all winners of a specific lottery, regardless of the showing, select all users where `lottery_id` is equal to the id of the lottery and `winning_show_id` is not `NULL`.
-
-## Use Example
-
-- SQL query to create lottery_entries table
-
-- SELECT query to return randomly ordered entries
-
-- pick winners
-  `const winners = pickLotteryWinners(entries, 100);`
-
-- query marks winners in the database
-  `markAsWinnersInTheDatabase(winners)`
+1. The client app uses `POST /lotteries/<lottery_id>` endpoint to allow users to enter the lottery.
+2. At a predetermined time, the server calls `PUT /admin/lotteries/<lottery_id>/pickWinners` to select winners.
+3. `GET /admin/lotteries/<lottery_id>/winners` can be used to display the list of winners in the admin app or to automatically notify the winners.
