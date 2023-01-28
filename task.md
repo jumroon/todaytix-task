@@ -77,7 +77,7 @@ function pickLotteryWinners(entries, numberOfTickets) {
 
 - Description: enter specific lottery, user chooses number of tickets and showings
 
-- Data sent:
+- Example payload:
 
 ```
 {
