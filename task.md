@@ -81,10 +81,10 @@ function pickLotteryWinners(entries, numberOfTickets) {
 
 ```
 {
-"user_id": 1,
-"lottery_id": 1,
-"number_tickets": 2,
-"show_id": [1, 2],
+  "user_id": 1,
+  "lottery_id": 1,
+  "number_tickets": 2,
+  "show_id": [1, 2],
 }
 ```
 
