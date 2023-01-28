@@ -40,7 +40,7 @@ ORDER BY random() LIMIT <limit>;
 
 This is an SQL query that selects a `<limit>` number of users in a random order.
 
-Limit: trade-offs to having a limit or not. If there is no limit, returning every user means that the algorithm can go through every user and raises chance that all the tickets will be given away. However, without a limit the query will be more costly.
+> Trade-offs to having a limit or not. If there is no limit, returning every user means that the algorithm can go through every user and raises chance that all the tickets will be given away. However, without a limit the query will be more costly.
 
 An algorithm is used to pick winners from the list returned from the SQL query. Algorithm goes through each entry in the list and puts winners into an array using the following criteria:
 
